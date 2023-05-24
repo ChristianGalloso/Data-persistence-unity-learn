@@ -12,12 +12,9 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
+    public bool m_started = false;
     
-    private bool m_Started = false;
     private int m_Points;
-    
-    private bool m_GameOver = false;
-
     
     // Start is called before the first frame update
     void Start()
@@ -40,28 +37,17 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
-        if (!m_Started)
+        if (m_started == false)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                m_Started = true;
-                float randomDirection = Random.Range(-1.0f, 1.0f);
-                Vector3 forceDir = new Vector3(randomDirection, 1, 0);
-                forceDir.Normalize();
+            m_started = true;
+            float randomDirection = Random.Range(-1.0f, 1.0f);
+            Vector3 forceDir = new Vector3(randomDirection, 1, 0);
+            forceDir.Normalize();
 
-                Ball.transform.SetParent(null);
-                Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
-            }
-        }
-        else if (m_GameOver)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            Ball.transform.SetParent(null);
+            Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
         }
     }
-
     void AddPoint(int point)
     {
         m_Points += point;
@@ -70,7 +56,6 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
-        m_GameOver = true;
         GameOverText.SetActive(true);
     }
 }
