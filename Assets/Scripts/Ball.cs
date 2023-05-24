@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Rigidbody m_Rigidbody;
+    public Rigidbody m_Rigidbody;
 
     void Start()
     {

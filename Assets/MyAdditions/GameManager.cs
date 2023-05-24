@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public int HighScore;
     public int NumberTries;
+    public bool IsGameOver = false;
 
 
     // Start is called before the first frame update
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
     class DataToSave
     {
         public int HighScore;
-        public int NumberTries;
+        public int NumberTries=0;
     }
     public void SaveData()
     {

@@ -9,9 +9,15 @@ public class Brick : MonoBehaviour
     public UnityEvent<int> onDestroyed;
     
     public int PointValue;
+    public static int NumberBrick = 36;
+    public MainManager MainManagerScript;
+    public Ball BallScript;
 
     void Start()
     {
+        NumberBrick = 36;
+        MainManagerScript=GameObject.Find("MainManager").GetComponent<MainManager>();
+        BallScript = GameObject.Find("Ball").GetComponent<Ball>();
         var renderer = GetComponentInChildren<Renderer>();
 
         MaterialPropertyBlock block = new MaterialPropertyBlock();
@@ -36,8 +42,16 @@ public class Brick : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         onDestroyed.Invoke(PointValue);
-        
+        NumberBrick--;  
         //slight delay to be sure the ball have time to bounce
         Destroy(gameObject, 0.2f);
+    }
+    private void Update()
+    {
+        if (NumberBrick == 0)
+        {
+            MainManagerScript.GameOver(true);
+            BallScript.m_Rigidbody.velocity = Vector3.zero;
+        }
     }
 }

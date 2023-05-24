@@ -11,14 +11,21 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
-    public GameObject GameOverText;
-    public bool m_started = false;
-    
-    private int m_Points;
+    public Text HighScoreText;
+    public Text GameOverText;
+    public Button TryAgainButton;
+    public Button BackToMainMenuButton;
+    public bool m_started = false;  
+    public int m_Points;
     
     // Start is called before the first frame update
     void Start()
     {
+        if (GameManager.Instance.NumberTries>0)
+        {
+            HighScoreText.text = "HighScore: " + GameManager.Instance.HighScore;
+        }
+        GameManager.Instance.IsGameOver = false;
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -39,6 +46,7 @@ public class MainManager : MonoBehaviour
     {
         if (m_started == false)
         {
+            GameManager.Instance.NumberTries++;
             m_started = true;
             float randomDirection = Random.Range(-1.0f, 1.0f);
             Vector3 forceDir = new Vector3(randomDirection, 1, 0);
@@ -54,8 +62,23 @@ public class MainManager : MonoBehaviour
         ScoreText.text = $"Score : {m_Points}";
     }
 
-    public void GameOver()
+    public void GameOver( bool Victory)
     {
-        GameOverText.SetActive(true);
+        GameOverText.gameObject.SetActive(true);
+        if (Victory == true)
+        {
+         GameOverText.text = "YOU WON!";
+        }
+        else
+        {
+         GameOverText.text = "GAME OVER";
+        }
+        TryAgainButton.gameObject.SetActive(true);
+        BackToMainMenuButton.gameObject.SetActive(true);
+        GameManager.Instance.IsGameOver= true;
+        if (m_Points> GameManager.Instance.HighScore)
+        {
+        GameManager.Instance.HighScore = m_Points;
+        }
     }
 }

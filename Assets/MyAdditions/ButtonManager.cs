@@ -10,6 +10,7 @@ public class ButtonManager : MonoBehaviour
   public void LoadGame()
     {
         SceneManager.LoadScene("main");
+        GameManager.Instance.SaveData();
     }
   public void QuitGame()
     {
@@ -18,9 +19,11 @@ public class ButtonManager : MonoBehaviour
 #else
     Application.Quit();
 #endif
+    GameManager.Instance.SaveData();
     }
   public void LoadMenu()
     {
         SceneManager.LoadScene("Menù");
+        GameManager.Instance.SaveData();
     }
 }
