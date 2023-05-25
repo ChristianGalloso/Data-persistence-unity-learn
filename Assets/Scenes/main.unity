@@ -515,6 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9378aa3f6eac646479e54cd5932ffd3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Rigidbody: {fileID: 0}
 --- !u!1 &188020404
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +649,7 @@ MonoBehaviour:
   TryAgainButton: {fileID: 1962376875}
   BackToMainMenuButton: {fileID: 1343980939}
   m_started: 0
+  m_Points: 0
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,7 +1969,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'HighScore: 0'
+  m_Text: 'HighScore: ---'
 --- !u!222 &2078529057
 CanvasRenderer:
   m_ObjectHideFlags: 0
